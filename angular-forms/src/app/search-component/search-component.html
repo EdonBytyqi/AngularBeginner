@@ -1,0 +1,6 @@
+<p>search-component works!</p>
+<input [formControl]="searchQuery">
+@if (searchQuery.invalid && searchQuery.touched) {
+  <p style="color: red">This field is required!</p>
+}
+<p> {{ searchQuery.value }} </p>
