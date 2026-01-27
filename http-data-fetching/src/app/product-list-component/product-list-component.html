@@ -1,0 +1,11 @@
+@if (products$ | async; as data) {
+  <ul>
+    @for (item of data.products; track item.id) {
+      <li>
+        <b>{{ item.title }}</b> - ${{ item.price }}
+      </li>
+    }
+  </ul>
+}@else {
+    <div> Loading products... </div>
+}
