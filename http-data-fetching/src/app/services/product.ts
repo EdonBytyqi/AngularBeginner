@@ -11,4 +11,7 @@ export class Product {
   getProducts() {
     return this.http.get<ProductResponse>('https://dummyjson.com/products');
   }
+  searchProducts(query: string) {
+    return this.http.get<ProductResponse>(`https://dummyjson.com/products/search?q=${query}`);
+  }
 }

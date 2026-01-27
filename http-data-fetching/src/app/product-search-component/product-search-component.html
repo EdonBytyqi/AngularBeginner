@@ -1,0 +1,14 @@
+<input type="text" [formControl]="queryControl">
+<button (click)="search()">Search</button>
+
+<hr>
+
+@if (products$ | async; as data) {
+    <ul>
+    @for (item of data.products; track item.id) {
+      <li>
+        <b>{{ item.title }}</b> - ${{ item.price }}
+      </li>
+    }
+    </ul>
+}
