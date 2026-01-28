@@ -7,7 +7,9 @@
     <ul>
     @for (item of data.products; track item.id) {
       <li>
-        <b>{{ item.title }}</b> - ${{ item.price }}
+        <a routerLink="['/products', item.id]">
+          {{ item.title }}
+        </a>
       </li>
     }
     </ul>
