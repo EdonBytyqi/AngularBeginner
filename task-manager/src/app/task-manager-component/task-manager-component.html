@@ -1,0 +1,21 @@
+<!-- Header / Stats -->
+<p>Progress: {{ stats() }}</p>
+
+<!-- Add Task Form -->
+<form (ngSubmit)="add()">
+  <input type="text" [formControl]="taskInput" placeholder="Enter a task" />
+  <button type="submit" [disabled]="taskInput.invalid">Add</button>
+</form>
+
+<!-- Task List -->
+<ul>
+  @for (task of tasks(); track task.id) {
+    <li [style.text-decoration]="task.completed ? 'line-through' : 'none'">
+      <label>
+        <input type="checkbox" [checked]="task.completed" (change)="toggle(task.id)" />
+        {{ task.title }}
+      </label>
+      <button (click)="delete(task.id)">❌</button>
+    </li>
+  }
+</ul>

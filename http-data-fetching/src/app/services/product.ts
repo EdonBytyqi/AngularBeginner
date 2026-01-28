@@ -17,4 +17,4 @@ export class Product {
   getProduct(id: string | number) {
     return this.http.get<ProductItem>(`https://dummyjson.com/products/${id}`);
   }
-}
+} 

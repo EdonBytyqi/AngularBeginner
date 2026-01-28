@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed, effect } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -6,14 +6,20 @@ import { Component, signal } from '@angular/core';
   template: `
     <p>Count is: {{ count() }}</p>
     <button (click)="increment()">+1</button>
+    <p>Double is: {{ doubleCount() }}</p>
   `,
 })
 export class CounterComponent {
-  // 1. Create the signal
   count = signal(0);
+  doubleCount = computed(() => this.count() * 2);
 
   increment() {
-    // 2. Update the signal
     this.count.update((val) => val + 1);
+  }
+
+  constructor() {
+    effect(() => {
+      console.log(`Current count: ${this.count()}`);
+    });
   }
 }
