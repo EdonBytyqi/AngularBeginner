@@ -5,8 +5,13 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('angular-ai-tutor');
+  protected readonly welcomeMessage = signal('Welcome to your Angular AI Tutor!');
+
+  onButtonClick() {
+    console.log('Button was clicked!');
+  }
 }
