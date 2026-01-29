@@ -1,3 +1,9 @@
-<h1>{{ welcomeMessage() }}</h1>
-<button (click)="onButtonClick()">Click me!</button>
-<p>Count: {{ count() }}</p>
+<h1>{{ recipe().name }}</h1>
+<p>{{ recipe().description }}</p>
+
+<button (click)="showPreviousRecipe()">Previous Recipe</button>
+<button (click)="showNextRecipe()">Next Recipe</button>
+
+<p>Servings: {{ servings() }}</p>
+<button (click)="decrement()">Decrease Servings</button>
+<button (click)="increment()">Increase Servings</button>
