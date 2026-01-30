@@ -1,11 +1,1 @@
-<h1>{{ recipe().name }}</h1>
-<p>{{ recipe().description }}</p>
-
-<button (click)="showPreviousRecipe()">Previous Recipe</button>
-<button (click)="showNextRecipe()">Next Recipe</button>
-
-<p>Servings: {{ servings() }}</p>
-<button (click)="decrement()">Decrease Servings</button>
-<button (click)="increment()">Increase Servings</button>
-<pre>{{ adjustedIngredients() | json }}</pre>
-<img [src]="recipe().imgUrl" alt="{{recipe().name}}" width="200" />
+<app-recipe-list></app-recipe-list>
