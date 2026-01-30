@@ -8,3 +8,4 @@
 <button (click)="decrement()">Decrease Servings</button>
 <button (click)="increment()">Increase Servings</button>
 <pre>{{ adjustedIngredients() | json }}</pre>
+<img [src]="recipe().imgUrl" alt="{{recipe().name}}" width="200" />

@@ -16,6 +16,8 @@ export class App {
   protected readonly recipe = signal<RecipeModel>(MOCK_RECIPES[0]);
   protected readonly servings = signal<number>(0);
 
+  imageUrl = computed(() => this.recipe().imgUrl);
+
   protected readonly adjustedIngredients = computed(() => {
     // 1. Get the current recipe and servings values
     const currentRecipe = this.recipe();
