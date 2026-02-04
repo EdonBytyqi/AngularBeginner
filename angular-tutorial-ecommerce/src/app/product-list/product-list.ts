@@ -1,5 +1,6 @@
 import { Component, input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 // Define the Product interface above the @Component decorator
 export interface Product {
@@ -11,7 +12,7 @@ export interface Product {
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })

@@ -1,0 +1,7 @@
+@if (product) {
+  <h2>{{ product.name }} Details</h2>
+  <p>Price: ${{ product.price }}</p>
+  <p>{{ product.description }}</p>
+} @else {
+  <p>Product not found!</p>
+}
