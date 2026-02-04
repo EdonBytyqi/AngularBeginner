@@ -1,7 +1,8 @@
-import { Component, signal, computed, effect, untracked, input } from '@angular/core';
+import { Component, signal, computed, effect, untracked, input, Signal } from '@angular/core'; // <-- Add Signal
 import { RouterOutlet } from '@angular/router';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { ProductList, Product } from './product-list/product-list';
+import { ProductService } from './product'; // <-- Import ProductService from './product'
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,6 @@ import { ProductList, Product } from './product-list/product-list';
 })
 export class App {
   protected readonly title = signal<string>('My First Angular App');
-
-  // Add this new computed signal right below your 'title' signal
   protected readonly titleStatus = computed(() => {
     if (this.title() === 'My First Angular App') {
       return 'This is the initial title.';
@@ -22,34 +21,14 @@ export class App {
     }
   });
 
-  // Define some sample products as a signal
-  protected readonly products = signal<Product[]>([
-    {
-      id: 1,
-      name: 'Angular T-Shirt',
-      price: 25,
-      description: 'Comfortable cotton t-shirt with Angular logo.',
-    },
-    {
-      id: 2,
-      name: 'NgRx Mug',
-      price: 12,
-      description: 'Coffee mug for reactive state management fans.',
-    },
-    {
-      id: 3,
-      name: 'TypeScript Stickers',
-      price: 5,
-      description: 'Stickers to show off your TypeScript love.',
-    },
-  ]);
-
-  onProductAddedToCart(product: Product) { 
-    console.log('Product added to cart:', product);
-  }
+  // This will now hold the signal returned by the ProductService
+  protected products: Signal<Product[]>; // <-- Declare 'products' as a Signal<Product[]>
 
   // Add a constructor and the effect here
-  constructor() {
+  constructor(private productService: ProductService) {
+    // <-- Inject ProductService
+    this.products = this.productService.getProducts(); // <-- Assign the signal from the service
+
     effect(() => {
       const currentTitle = this.title(); // This read IS tracked, so the effect re-runs if 'title' changes
       console.log(`Effect triggered. Current title: ${currentTitle}`);
@@ -61,6 +40,10 @@ export class App {
         console.log(`  (Logged at: ${Date.now()}) - Untracked timestamp`);
       });
     });
+  }
+
+  onProductAddedToCart(product: Product) {
+    console.log('Product added to cart:', product);
   }
 
   protected handleClick() {
