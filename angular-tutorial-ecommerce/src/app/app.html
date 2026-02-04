@@ -10,3 +10,11 @@
 
 <!-- Instance 2: Binding the 'message' input to our 'title' signal -->
 <app-hello-world [message]="title()"></app-hello-world>
+
+<hr />
+<h3>Our Product List:</h3>
+<!-- Listen for the (productAdded) event and call onProductAddedToCart -->
+<app-product-list
+  [products]="products()"
+  (productAdded)="onProductAddedToCart($event)"
+></app-product-list>

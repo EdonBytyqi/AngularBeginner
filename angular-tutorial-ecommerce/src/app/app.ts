@@ -1,11 +1,12 @@
 import { Component, signal, computed, effect, untracked, input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
+import { ProductList, Product } from './product-list/product-list';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HelloWorldComponent],
+  imports: [RouterOutlet, HelloWorldComponent, ProductList],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -20,6 +21,32 @@ export class App {
       return 'The title has been changed!';
     }
   });
+
+  // Define some sample products as a signal
+  protected readonly products = signal<Product[]>([
+    {
+      id: 1,
+      name: 'Angular T-Shirt',
+      price: 25,
+      description: 'Comfortable cotton t-shirt with Angular logo.',
+    },
+    {
+      id: 2,
+      name: 'NgRx Mug',
+      price: 12,
+      description: 'Coffee mug for reactive state management fans.',
+    },
+    {
+      id: 3,
+      name: 'TypeScript Stickers',
+      price: 5,
+      description: 'Stickers to show off your TypeScript love.',
+    },
+  ]);
+
+  onProductAddedToCart(product: Product) { 
+    console.log('Product added to cart:', product);
+  }
 
   // Add a constructor and the effect here
   constructor() {
