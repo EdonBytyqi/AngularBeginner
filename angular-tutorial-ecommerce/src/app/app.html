@@ -3,3 +3,10 @@
 
 <button (click)="handleClick()">Click me!</button>
 <router-outlet />
+<hr />
+<h3>This is the new HelloWorldComponent:</h3>
+<!-- Instance 1: Using the default message -->
+<app-hello-world></app-hello-world>
+
+<!-- Instance 2: Binding the 'message' input to our 'title' signal -->
+<app-hello-world [message]="title()"></app-hello-world>

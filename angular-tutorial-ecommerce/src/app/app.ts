@@ -1,10 +1,11 @@
-import { Component, signal, computed, effect } from '@angular/core';
+import { Component, signal, computed, effect, untracked, input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HelloWorldComponent } from './hello-world/hello-world.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HelloWorldComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -23,7 +24,15 @@ export class App {
   // Add a constructor and the effect here
   constructor() {
     effect(() => {
-      console.log(`The current title is: ${this.title()}`);
+      const currentTitle = this.title(); // This read IS tracked, so the effect re-runs if 'title' changes
+      console.log(`Effect triggered. Current title: ${currentTitle}`);
+
+      // This part is untracked. If we had a signal read here, it wouldn't make the effect re-run.
+      // Here, we're just logging Date.now() to show that this code executes with the effect,
+      // but if Date.now() itself was a signal, it wouldn't cause the effect to re-trigger.
+      untracked(() => {
+        console.log(`  (Logged at: ${Date.now()}) - Untracked timestamp`);
+      });
     });
   }
 
