@@ -1,24 +1,71 @@
-<h1>{{ title() }}</h1>
-<p>{{ titleStatus() }}</p>
+<div class="app-wrapper">
+  <!-- Promo Banner -->
+  <div class="promo-banner">
+    FREE SHIPPING OVER $50 • TAXES AND DUTIES STILL APPLY
+  </div>
 
-<button (click)="handleClick()">Click me!</button>
-<router-outlet />
-<hr />
-<h3>This is the new HelloWorldComponent:</h3>
-<!-- Instance 1: Using the default message -->
-<app-hello-world></app-hello-world>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <!-- Left Nav -->
+      <nav class="nav-left">
+        <a href="#" class="nav-link">Shop</a>
+        <a href="#" class="nav-link">About</a>
+        <a href="#" class="nav-link">More</a>
+      </nav>
 
-<!-- Instance 2: Binding the 'message' input to our 'title' signal -->
-<app-hello-world [message]="title()"></app-hello-world>
+      <!-- Logo -->
+      <h1 class="logo">{{ title() }}</h1>
 
-<hr />
-<h3>Our Product List:</h3>
-@if (products().length > 0) {
-  <!-- Listen for the (productAdded) event and call onProductAddedToCart -->
-  <app-product-list
-    [products]="products()"
-    (productAdded)="onProductAddedToCart($event)"
-  ></app-product-list>
-} @else {
-  <p>No products are currently available.</p>
-}
+      <!-- Right Nav -->
+      <nav class="nav-right">
+        <a href="#" class="nav-link">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          Search
+        </a>
+        <a href="#" class="nav-link">Account</a>
+        <a href="#" class="nav-link">
+          Bag<span class="bag-count">{{ cartItemCount() }}</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">Home / Shop</div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet />
+
+    <!-- Cart Section -->
+    <app-cart></app-cart>
+
+    <!-- Products Section -->
+    <section class="section">
+      <h2 class="section-title">Our Products</h2>
+      @if (products().length > 0) {
+        <app-product-list
+          [products]="products()"
+          (productAdded)="onProductAddedToCart($event)"
+        ></app-product-list>
+      } @else {
+        <p class="empty-message">No products are currently available.</p>
+      }
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="section">
+      <app-contact-form></app-contact-form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      &copy; 2024 {{ title() }}. All rights reserved.
+    </div>
+  </footer>
+</div>

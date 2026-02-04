@@ -25,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
     const productIdFromRoute = Number(routeParams.get('id'));
 
     // Find the product that corresponds with the id provided in route.
-    const products = this.productService.getProducts()(); // Get the products array from the service
-    this.product = products.find((p) => p.id === productIdFromRoute);
+    const products = this.productService.products(); // Get the products array from the signal
+    this.product = products.find((p: Product) => p.id === productIdFromRoute);
   }
 }

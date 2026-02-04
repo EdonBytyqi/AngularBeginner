@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Angular T-Shirt (from API)",
+    "price": 27,
+    "description": "Comfortable cotton t-shirt with Angular logo, fetched from a mock API."
+  },
+  {
+    "id": 2,
+    "name": "NgRx Mug (from API)",
+    "price": 14,
+    "description": "Coffee mug for reactive state management fans, fetched from a mock API."
+  },
+  {
+    "id": 3,
+    "name": "TypeScript Stickers (from API)",
+    "price": 6,
+    "description": "Stickers to show off your TypeScript love, fetched from a mock API."
+  }
+]

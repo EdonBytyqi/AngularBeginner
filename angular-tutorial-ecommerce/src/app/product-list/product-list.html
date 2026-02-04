@@ -1,16 +1,28 @@
-<h2>Our Products</h2>
-<div class="product-list-container">
+<div class="product-grid">
   @for (product of products(); track product.id) {
     <div class="product-card">
-      <!-- Change this line -->
-      <h3>
-        <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
-      </h3>
-      <p>Price: ${{ product.price }}</p>
-      <p>{{ product.description }}</p>
-      <button (click)="addToCart(product)">Add to Cart</button>
+      <!-- Product Image -->
+      <a [routerLink]="['/products', product.id]" class="product-image-link">
+        <div class="product-image">
+          <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <a [routerLink]="['/products', product.id]">
+          <h3 class="product-name">{{ product.name }}</h3>
+        </a>
+        <p class="product-description">{{ product.description }}</p>
+        <p class="product-price">${{ product.price }}</p>
+        <button class="add-to-bag-btn" (click)="addToCart(product)">
+          Add to Bag
+        </button>
+      </div>
     </div>
   } @empty {
-    <p>No products available.</p>
+    <p class="empty-message">No products available.</p>
   }
 </div>

@@ -1,0 +1,114 @@
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Promo Banner */
+.promo-banner {
+  background-color: #7c3aed;
+  color: white;
+  text-align: center;
+  padding: 10px 24px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+/* Header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-link {
+  font-size: 14px;
+  color: #525252;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #1a1a1a;
+}
+
+.nav-link svg {
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.bag-count {
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  font-size: 14px;
+  color: #737373;
+}
+
+/* Main Content */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  flex: 1;
+}
+
+.section {
+  margin: 48px 0;
+}
+
+.section-title {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid #e5e5e5;
+  padding: 32px 24px;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 14px;
+  color: #737373;
+}

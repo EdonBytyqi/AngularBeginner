@@ -3,11 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { ProductList, Product } from './product-list/product-list';
 import { ProductService } from './product'; // <-- Import ProductService from './product'
+import { ContactFormComponent } from './contact-form/contact-form'; // Import the new ContactFormComponent
+import { CartComponent } from './cart/cart'; // Import the new CartComponent
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HelloWorldComponent, ProductList],
+  imports: [RouterOutlet, HelloWorldComponent, ProductList, ContactFormComponent, CartComponent], // Add CartComponent here
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -21,29 +23,42 @@ export class App {
     }
   });
 
-  // This will now hold the signal returned by the ProductService
-  protected products: Signal<Product[]>; // <-- Declare 'products' as a Signal<Product[]>
+    // This will now hold the signal returned by the ProductService
+    protected products: Signal<Product[]>; // <-- Declare 'products' as a Signal<Product[]>
+    protected cartItemCount = computed(() => this.productService.cart().length);
 
-  // Add a constructor and the effect here
-  constructor(private productService: ProductService) {
-    // <-- Inject ProductService
-    this.products = this.productService.getProducts(); // <-- Assign the signal from the service
+  
 
-    effect(() => {
-      const currentTitle = this.title(); // This read IS tracked, so the effect re-runs if 'title' changes
-      console.log(`Effect triggered. Current title: ${currentTitle}`);
+    // Add a constructor and the effect here
 
-      // This part is untracked. If we had a signal read here, it wouldn't make the effect re-run.
-      // Here, we're just logging Date.now() to show that this code executes with the effect,
-      // but if Date.now() itself was a signal, it wouldn't cause the effect to re-trigger.
-      untracked(() => {
-        console.log(`  (Logged at: ${Date.now()}) - Untracked timestamp`);
+    constructor(private productService: ProductService) { // <-- Inject ProductService
+
+      this.products = this.productService.products; // <-- Assign the readonly signal from the service
+
+  
+
+      effect(() => {
+
+        const currentTitle = this.title(); // This read IS tracked, so the effect re-runs if 'title' changes
+
+        console.log(`Effect triggered. Current title: ${currentTitle}`);
+
+        
+
+        // This part is untracked. If we had a signal read here, it wouldn't make the effect re-run.
+
+        untracked(() => {
+
+          console.log(`  (Logged at: ${Date.now()}) - Untracked timestamp`);
+
+        });
+
       });
-    });
-  }
+
+    }
 
   onProductAddedToCart(product: Product) {
-    console.log('Product added to cart:', product);
+    this.productService.addToCart(product);
   }
 
   protected handleClick() {

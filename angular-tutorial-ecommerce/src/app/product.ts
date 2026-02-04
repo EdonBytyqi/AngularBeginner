@@ -1,6 +1,8 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
-// Copy the Product interface here from product-list.ts
+// Product interface remains the same
 export interface Product {
   id: number;
   name: string;
@@ -9,35 +11,38 @@ export interface Product {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ProductService {
-  // Define your sample products here, encapsulated within the service
-  private readonly products = signal<Product[]>([
-    {
-      id: 1,
-      name: 'Angular T-Shirt',
-      price: 25,
-      description: 'Comfortable cotton t-shirt with Angular logo.',
-    },
-    {
-      id: 2,
-      name: 'NgRx Mug',
-      price: 12,
-      description: 'Coffee mug for reactive state management fans.',
-    },
-    {
-      id: 3,
-      name: 'TypeScript Stickers',
-      price: 5,
-      description: 'Stickers to show off your TypeScript love.',
-    },
-  ]);
+  private http = inject(HttpClient);
 
-  constructor() {}
+  // Private signals for products and cart
+  #products = signal<Product[]>([]);
+  #cart = signal<Product[]>([]);
 
-  // Method to provide the products signal
-  getProducts() {
-    return this.products;
+  // Public readonly signals for components to bind to
+  public readonly products = this.#products.asReadonly();
+  public readonly cart = this.#cart.asReadonly();
+  
+  // Computed signal for cart total
+  public readonly cartTotal = computed(() => {
+    return this.#cart().reduce((total, product) => total + product.price, 0);
+  });
+
+  constructor() {
+    this.fetchProducts();
+  }
+
+  // Method to add a product to the cart
+  addToCart(product: Product) {
+    this.#cart.update(cart => [...cart, product]);
+    console.log(`${product.name} added to cart.`);
+  }
+
+  // Method to fetch products from the mock JSON API
+  private fetchProducts() {
+    this.http.get<Product[]>('/assets/products.json').pipe(
+      tap(products => this.#products.set(products))
+    ).subscribe();
   }
 }

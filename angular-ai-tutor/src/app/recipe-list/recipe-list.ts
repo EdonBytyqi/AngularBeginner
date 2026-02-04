@@ -23,6 +23,10 @@ export class RecipeList {
     }));
   });
 
+  protected readonly totalIngredientsCount = computed(() => {
+    return this.adjustedIngredients().length;
+  });
+
   protected showNextRecipe(): void {
     this.recipe.set(MOCK_RECIPES[1]);
   }

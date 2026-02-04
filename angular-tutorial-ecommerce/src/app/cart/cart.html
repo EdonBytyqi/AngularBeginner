@@ -1,0 +1,83 @@
+@if (cart().length > 0) {
+  <div class="cart-section">
+    <h2 class="cart-title">Your Bag</h2>
+
+    <!-- Cart Table Header -->
+    <div class="cart-header">
+      <div>Product</div>
+      <div class="cart-header-price">Price</div>
+      <div class="cart-header-qty">Quantity</div>
+      <div class="cart-header-total">Total</div>
+    </div>
+
+    <!-- Cart Items -->
+    <div class="cart-items">
+      @for (item of cart(); track item.id) {
+        <div class="cart-item">
+          <!-- Product Info -->
+          <div class="product-info">
+            <div class="product-image">
+              <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+              </svg>
+            </div>
+            <div class="product-details">
+              <h3>{{ item.name }}</h3>
+              <p>{{ item.description }}</p>
+              <button class="remove-btn">Remove</button>
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="item-price">${{ item.price }}</div>
+
+          <!-- Quantity -->
+          <div class="quantity-control">
+            <button class="qty-btn">−</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn">+</button>
+          </div>
+
+          <!-- Total -->
+          <div class="item-total">${{ item.price }}</div>
+        </div>
+      }
+    </div>
+
+    <!-- Cart Footer -->
+    <div class="cart-footer">
+      <!-- Left Column - Info -->
+      <div class="info-column">
+        <div class="info-section">
+          <h4>Delivery Info</h4>
+          <p>See our delivery & returns info here</p>
+        </div>
+        <div class="info-section">
+          <h4>Payment Info</h4>
+          <p>We accept the following methods of payment</p>
+          <div class="payment-methods">
+            <span class="payment-badge">VISA</span>
+            <span class="payment-badge">MC</span>
+            <span class="payment-badge">AMEX</span>
+            <span class="payment-badge">PayPal</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Totals -->
+      <div class="totals-section">
+        <div class="subtotal-row">
+          <span class="subtotal-label">Subtotal</span>
+          <span class="subtotal-value">${{ cartTotal() }}</span>
+        </div>
+        <p class="tax-note">Taxes and shipping calculated at checkout</p>
+
+        <div class="button-row">
+          <button class="btn btn-outline">UPDATE</button>
+          <button class="btn btn-primary">CHECKOUT</button>
+        </div>
+        <button class="btn-shop-pay">Shop Pay</button>
+      </div>
+    </div>
+  </div>
+}
